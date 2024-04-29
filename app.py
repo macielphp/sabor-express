@@ -1,6 +1,8 @@
 import os
 
-restaurantes = ['Pizza','Sushi']
+restaurantes = [{'nome':'Praça', 'categoria': 'Arabe', 'ativo':False},
+                {'nome':'Panni', 'categoria': 'Espano', 'ativo':True},
+                {'nome':'Canto', 'categoria': 'Grego', 'ativo':False}]
 def exibir_nome_do_programa():
     print('Sabor Express\n')
 def exibir_opcoes():
@@ -12,7 +14,7 @@ def exibir_opcoes():
 def finalizar__app():
     exibir_subtitulo('Finalizar app\n')
 def voltar_ao_menu_principal():
-    input('\nDigite uma tecla oara voltar para o menu principal: ')
+    input('Digite uma tecla oara voltar para o menu principal: ')
     main()
 def opcao_invalida():
     print('Opção inválida.\n')
@@ -23,15 +25,20 @@ def exibir_subtitulo(texto):
 def cadastrar_novo_restaurante():
     exibir_subtitulo('Cadastro de novos restaurantes\n')
     nome_do_restaurante = input('Digite o nome do restaurante que deseja começar: ')
-    restaurantes.append(nome_do_restaurante)
-    print(f'O restaurante: {nome_do_restaurante} foi cadastrado com sucesso\n')
+    categoria = input(f'Digite o nome da categoria do restaurante {nome_do_restaurante}: ')
+    dados_do_restaurante = {'nome': nome_do_restaurante, 'categoria': categoria, 'Ativo': False}
+    restaurantes.append(dados_do_restaurante)
+    print(f'O restaurante: {nome_do_restaurante} foi cadastrado com sucesso!\n')
     voltar_ao_menu_principal()
 
 def listar_restaurantes():
     exibir_subtitulo('Listando os restaurantes')
 
+     
     for restaurante in restaurantes:
-        print(f'.{restaurante}')
+        nome_restaurante = restaurante['nome']
+        categoria = restaurante['categoria']
+        print(f'- {nome_restaurante} | {categoria}')
         
     voltar_ao_menu_principal()
 def escolher_opcao():
@@ -41,8 +48,8 @@ def escolher_opcao():
             print('Cadastrar novo restaurante')
             cadastrar_novo_restaurante()
         elif opcao_escolhida == 2:
-            print('Liste restaurante: ')
-            print(restaurantes)
+            print('Lista de restaurantes: ')
+            listar_restaurantes()
         elif opcao_escolhida == 3:
             print('Ativar restaurante')
         elif opcao_escolhida == 4: 
